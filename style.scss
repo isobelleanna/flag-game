@@ -1,3 +1,7 @@
+@use "./styles/reset";
+@use "./styles/variables";
+
+
 * {
-    background-color: red;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
