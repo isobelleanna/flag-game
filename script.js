@@ -23,3 +23,34 @@ const countriesArr = [
 
 
 console.log(countriesArr[0]);
+const flagImg = document.getElementById("flag-img");
+const refreshButton = document.getElementById("refresh");
+const imgContainer = document.querySelector(".container__img")
+
+const generateRandom = () =>  {
+     return Math.floor(Math.random() * 4)
+}
+console.log(generateRandom())
+let random = generateRandom()
+
+const createNewFlag = (array) => {
+    console.log(array[random].flag)
+    return (
+        `<img
+           id="flag-img"
+           class="container__main--img"
+           src=${array[random].flag}
+           alt=${array[random].country}
+         />`
+ )
+}
+
+imgContainer.innerHTML = createNewFlag(countriesArr);
+
+const onClickRefresh = (event) => {
+    let random = generateRandom();
+    console.log(random);
+    console.log(countriesArr[random]);
+}
+
+refreshButton.addEventListener('click', onClickRefresh)
