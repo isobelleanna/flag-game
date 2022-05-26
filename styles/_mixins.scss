@@ -1,0 +1,9 @@
+@mixin verticalPadding() {
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+}
+
+@mixin horizontalPadding() {
+    padding-left: 2vh;
+    padding-right: 2vh;
+}

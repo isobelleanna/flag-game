@@ -8,25 +8,43 @@
     <title>Flag Game</title>
   </head>
   <body>
+    <nav class="nav">
+      <h1 class="nav__h1">Guess The Flag</h1>
+      <button class="nav__button" id="refresh">↩︎</button>
+    </nav>
     <div class="container">
-      <nav class="nav">
-        <h1 class="nav__h1">Guess The Flag</h1>
-        <button class="nav__button" id="refresh">↩︎</button>
-      </nav>
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/7/77/Flag_of_Algeria.svg"
-        alt="Flag of Algeria"
-      />
-      <h2 class="guess">First Guess</h2>
-      <h2 class="guess">Second Guess</h2>
-      <h2 class="guess">Third Guess</h2>
-      <h2 class="guess">Fourth Guess</h2>
-      <h2 class="guess">Fifth Guess</h2>
-      <h2 class="guess">Sixth Guess</h2>
-      <form id="country-form">
-        <label for="country-input"></label>
-        <input id="country-input" type="text" />
-      </form>
+      <div class="container-card">
+        <main class="container__main">
+          <img
+            class="container__main--img"
+            src="https://upload.wikimedia.org/wikipedia/commons/7/77/Flag_of_Algeria.svg"
+            alt="Flag of Algeria"
+          />
+          <div class="container__main--div">
+            <h2 class="container__main--h2">First Guess</h2>
+          </div>
+          <div class="container__main--div">
+            <h2 class="container__main--h2">Second Guess</h2>
+          </div>
+          <div class="container__main--div">
+            <h2 class="container__main--h2">Third Guess</h2>
+          </div>
+          <div class="container__main--div">
+            <h2 class="container__main--h2">Fourth Guess</h2>
+          </div>
+          <div class="container__main--div">
+            <h2 class="container__main--h2">Fifth Guess</h2>
+          </div>
+          <div class="container__main--div">
+            <h2 class="container__main--h2">Sixth Guess</h2>
+          </div>
+          <form class="container__main--form" id="country-form">
+            <label for="country-input"></label>
+            <input id="country-input" type="text" />
+            <input type="submit" />
+          </form>
+        </main>
+      </div>
     </div>
     <script src="script.js"></script>
   </body>

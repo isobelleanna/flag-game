@@ -1,22 +1,22 @@
 const countriesArr = [
     {
-        country : "france",
-        flag: "🇫🇷",
-        continent: "europe"
+        country : "bangladesh",
+        flag: "https://upload.wikimedia.org/wikipedia/commons/f/f9/Flag_of_Bangladesh.svg",
+        continent: "asia"
     },
      {
-        country : "germany",
-        flag: "🇩🇪",
+        country : "barbados",
+        flag: "https://upload.wikimedia.org/wikipedia/commons/e/ef/Flag_of_Barbados.svg",
+        continent: "Americas"
+    },
+    {
+        country : "belarus",
+        flag: "https://upload.wikimedia.org/wikipedia/commons/8/85/Flag_of_Belarus.svg",
         continent: "europe"
     },
     {
-        country : "spain",
-        flag: "🇪🇸",
-        continent: "europe"
-    },
-    {
-        country : "italy",
-        flag: "🇮🇹",
+        country : "belgium",
+        flag: "https://upload.wikimedia.org/wikipedia/commons/9/92/Flag_of_Belgium_%28civil%29.svg",
         continent: "europe"
     }
 ];

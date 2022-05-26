@@ -1,0 +1,16 @@
+@use "./mixins" as *;
+@use "./variables" as *;
+
+.nav {
+    @include verticalPadding();
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-family: $primary-font;
+    background-color: $colour-background-secondary;
+    color: $colour-font-primary;
+    &__button {
+        background-color: $colour-background-primary;
+        color: $colour-font-secondary;
+    }
+}

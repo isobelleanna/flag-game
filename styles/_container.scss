@@ -1,0 +1,38 @@
+@use "./mixins" as *;
+@use "./variables" as *;
+
+.body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    font-family: $primary-font;
+    color: $colour-font-primary;
+    border: 1px solid $colour-font-primary;
+    background-color: $colour-background-primary;
+    &__card {
+    width: 70%;
+    }
+
+    &__main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        @include verticalPadding();
+        
+    }&__main--img {
+        width: 70%;
+        @include verticalPadding();
+    }&__main--div {
+        @include verticalPadding();
+        width: 30%;
+        margin: 1vh;
+        background-color: $colour-background-secondary;
+        @include horizontalPadding();
+    }&__main--form {
+         @include verticalPadding();
+    }
+}
