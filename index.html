@@ -5,45 +5,50 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <title>Flag Game</title>
+    <title>Flagle</title>
   </head>
   <body>
     <nav class="nav">
       <h1 class="nav__h1">Guess The Flag</h1>
       <button class="nav__button" id="refresh">↩︎</button>
     </nav>
-    <div class="container">
-      <div class="container-card">
-        <main class="container__main">
-          <div class="container__img"></div>
-          <div class="container__main--div">
-            <h2 class="container__main--h2">First Guess</h2>
+    <div class="game">
+      <div class="game-card">
+        <main class="game__main">
+          <div class="game__img-container"></div>
+          <div class="game__main--div">
+            <h2 class="game__main--h2">First Guess</h2>
           </div>
-          <div class="container__main--div">
-            <h2 class="container__main--h2">Second Guess</h2>
+          <div class="game__main--div">
+            <h2 class="game__main--h2">Second Guess</h2>
           </div>
-          <div class="container__main--div">
-            <h2 class="container__main--h2">Third Guess</h2>
+          <div class="game__main--div">
+            <h2 class="game__main--h2">Third Guess</h2>
           </div>
-          <div class="container__main--div">
-            <h2 class="container__main--h2">Fourth Guess</h2>
+          <div class="game__main--div">
+            <h2 class="game__main--h2">Fourth Guess</h2>
           </div>
-          <div class="container__main--div">
-            <h2 class="container__main--h2">Fifth Guess</h2>
+          <div class="game__main--div">
+            <h2 class="game__main--h2">Fifth Guess</h2>
           </div>
-          <div class="container__main--div">
-            <h2 class="container__main--h2">Sixth Guess</h2>
+          <div class="game__main--div">
+            <h2 class="game__main--h2">Sixth Guess</h2>
           </div>
-          <form class="container__main--form" id="country-form">
+          <form class="game__main--form" id="country-form">
             <label for="country-input"></label>
-            <input id="country-input" type="search" list="country-list" />
+            <input
+              id="country-input"
+              type="search"
+              list="country-list"
+              placeholder="Guess the country"
+            />
             <datalist id="country-list">
               <option value="bangladesh">bangladesh</option>
               <option value="barbados">barbados</option>
               <option value="belarus">belarus</option>
               <option value="belgium">belgium</option>
             </datalist>
-            <input type="submit" />
+            <input class="country__button" type="submit" />
           </form>
         </main>
       </div>

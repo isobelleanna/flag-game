@@ -25,7 +25,7 @@ console.log(countriesArr[0]);
 //----------------------------------------------Variables------------------------------------------------------------------
 const flagImg = document.getElementById("flag-img");
 const refreshButton = document.getElementById("refresh");
-const imgContainer = document.querySelector(".container__img");
+const imgContainer = document.querySelector(".game__img-container");
 const countryForm = document.querySelector("#country-form");
 const countryInput = document.getElementById("country-input");
 
@@ -41,7 +41,7 @@ const createNewFlag = (array) => {
     return (
         `<img
            id="flag-img"
-           class="container__main--img"
+           class="game__main--img"
            src=${array[random].flag}
            alt=${array[random].country}
          />`
@@ -56,7 +56,7 @@ const onClickRefresh = (event) => {
     console.log(countriesArr[random]);
     imgContainer.innerHTML = `<img
            id="flag-img"
-           class="container__main--img"
+           class="game__main--img"
            src=${countriesArr[random].flag}
            alt=${countriesArr[random].country}
          />`

@@ -8,14 +8,14 @@
     justify-content: center;
 }
 
-.container {
+.game {
     font-family: $primary-font;
     color: $colour-font-primary;
     border: 1px solid $colour-font-primary;
     background-color: $colour-background-primary;
     &__card {
     width: 70%;
-    }&__img {
+    }&__img-container {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -33,7 +33,7 @@
         @include verticalPadding();
     }&__main--div {
         @include verticalPadding();
-        width: 30%;
+        width: 270px;
         margin: 1vh;
         background-color: $colour-background-secondary;
         @include horizontalPadding();
