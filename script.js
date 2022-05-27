@@ -21,13 +21,13 @@ const countriesArr = [
     }
 ];
 
-console.log(countriesArr[0]);
 //----------------------------------------------Variables------------------------------------------------------------------
-const flagImg = document.getElementById("flag-img");
 const refreshButton = document.getElementById("refresh");
 const imgContainer = document.querySelector(".game__img-container");
 const countryForm = document.querySelector("#country-form");
 const countryInput = document.getElementById("country-input");
+const allGuessHeadings = document.querySelectorAll(".game__main--h2");
+const correctHeadings = document.querySelectorAll(".game__main--h3")
 const firstGuess = document.querySelector(".game__main--h2-1");
 const secondGuess = document.querySelector(".game__main--h2-2");
 const thirdGuess = document.querySelector(".game__main--h2-3");
@@ -40,6 +40,7 @@ let isThirdGuess = false;
 let isFourthGuess = false;
 let isFifthGuess = false;
 let isSixthGuess = false;
+let correctAnswer = "";
 
 //----------------------------------------------Random------------------------------------------------------------------
 const generateRandom = () =>  {
@@ -49,7 +50,7 @@ const generateRandom = () =>  {
 //----------------------------------------------New Flag------------------------------------------------------------------
 const createNewFlag = (array) => {
     let random = generateRandom();
-    console.log(array[random].flag)
+    correctAnswer = `${array[random].country}`
     return (
         `<img
            id="flag-img"
@@ -64,52 +65,72 @@ imgContainer.innerHTML = createNewFlag(countriesArr);
 //----------------------------------------------Refresh------------------------------------------------------------------
 const onClickRefresh = (event) => {
     let random = generateRandom();
-    console.log(random);
-    console.log(countriesArr[random]);
+    correctAnswer = countriesArr[random].country;
+    allGuessHeadings.forEach(guess => {
+        guess.innerText = "";
+    });
+    countryInput.innerText = "";
+    isFirstGuess = false;
+    isSecondGuess = false;
+    isThirdGuess = false;
+    isFourthGuess = false;
+    isFifthGuess = false;
+    isSixthGuess = false;
     imgContainer.innerHTML = `<img
            id="flag-img"
            class="game__main--img"
            src=${countriesArr[random].flag}
            alt=${countriesArr[random].country}
          />`
+
     
 }
 
 //----------------------------------------------Submit Country Form----------------------------------------------------------------------
 const onSubmitCountryForm = (event) => {
     event.preventDefault();
-    console.log(event)
-    console.log(event.target[0].value)
+    countryInput.innerText = "";
     if (isFirstGuess === false) {
         firstGuess.innerText = event.target[0].value;
         isFirstGuess = true;
+        isItAMatch(event.target[0].value);
         return;
     }
     if (isSecondGuess === false) {
         secondGuess.innerText = event.target[0].value;
         isSecondGuess = true;
+        isItAMatch(event.target[0].value);
         return;
     }
     if (isThirdGuess === false) {
         thirdGuess.innerText = event.target[0].value;
         isThirdGuess = true;
+        isItAMatch(event.target[0].value);
         return;
     }
     if (isFourthGuess === false) {
         fourthGuess.innerText = event.target[0].value;
         isFourthGuess = true;
+        isItAMatch(event.target[0].value);
         return;
     }
     if (isFifthGuess === false) {
         fifthGuess.innerText = event.target[0].value;
         isFifthGuess = true;
+        isItAMatch(event.target[0].value);
         return;
     }
     if (isSixthGuess === false) {
         sixthGuess.innerText = event.target[0].value;
         isSixthGuess = true;
+        isItAMatch(event.target[0].value);
         return;
     }
+}
+
+//----------------------------------------------Is There a match---------------------------------------------------------------------
+const isItAMatch = (string) => {
+    string === correctAnswer ? alert("Correct"): console.log("Incorrect");
 }
 
 //----------------------------------------------Event Listeners------------------------------------------------------------------
