@@ -22,19 +22,21 @@ const countriesArr = [
 ];
 
 console.log(countriesArr[0]);
+//----------------------------------------------Variables------------------------------------------------------------------
 const flagImg = document.getElementById("flag-img");
 const refreshButton = document.getElementById("refresh");
 const imgContainer = document.querySelector(".container__img");
 const countryForm = document.querySelector("#country-form");
 const countryInput = document.getElementById("country-input");
 
+//----------------------------------------------Random------------------------------------------------------------------
 const generateRandom = () =>  {
      return Math.floor(Math.random() * 4)
 }
-console.log(generateRandom())
-let random = generateRandom()
 
+//----------------------------------------------New Flag------------------------------------------------------------------
 const createNewFlag = (array) => {
+    let random = generateRandom();
     console.log(array[random].flag)
     return (
         `<img
@@ -45,13 +47,20 @@ const createNewFlag = (array) => {
          />`
  )
 }
-
 imgContainer.innerHTML = createNewFlag(countriesArr);
 
+//----------------------------------------------Refresh------------------------------------------------------------------
 const onClickRefresh = (event) => {
     let random = generateRandom();
     console.log(random);
     console.log(countriesArr[random]);
+    imgContainer.innerHTML = `<img
+           id="flag-img"
+           class="container__main--img"
+           src=${countriesArr[random].flag}
+           alt=${countriesArr[random].country}
+         />`
 }
 
+//----------------------------------------------Event Listeners------------------------------------------------------------------
 refreshButton.addEventListener('click', onClickRefresh)
