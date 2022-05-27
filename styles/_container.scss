@@ -39,5 +39,7 @@
         @include horizontalPadding();
     }&__main--form {
          @include verticalPadding();
+    }&__main--h2 {
+        font-size: 15px;
     }
 }
