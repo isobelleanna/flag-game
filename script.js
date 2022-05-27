@@ -21,11 +21,12 @@ const countriesArr = [
     }
 ];
 
-
 console.log(countriesArr[0]);
 const flagImg = document.getElementById("flag-img");
 const refreshButton = document.getElementById("refresh");
-const imgContainer = document.querySelector(".container__img")
+const imgContainer = document.querySelector(".container__img");
+const countryForm = document.querySelector("#country-form");
+const countryInput = document.getElementById("country-input");
 
 const generateRandom = () =>  {
      return Math.floor(Math.random() * 4)
