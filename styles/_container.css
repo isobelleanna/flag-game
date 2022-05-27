@@ -35,9 +35,13 @@
 .game__main--div {
   padding-top: 2vh;
   padding-bottom: 2vh;
+  height: 12px;
   width: 70%;
   margin: 1vh;
   background-color: #F7FFBD;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   padding-left: 2vh;
   padding-right: 2vh;
 }
@@ -46,5 +50,5 @@
   padding-bottom: 2vh;
 }
 .game__main--h2 {
-  font-size: 15px;
+  font-size: 12px;
 }
