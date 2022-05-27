@@ -1,13 +1,22 @@
 @use "./mixins" as *;
 @use "./variables" as *;
 
+.game__main--form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .country-form {
     &__input {
+        width: 60%;
         padding: 8px;
     }
     &__button {
         background-color: $colour-background-secondary;
         color: $colour-font-primary;
         padding: 8px;
+        border: 1px solid $colour-font-primary;
     }
 }

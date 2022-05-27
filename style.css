@@ -68,11 +68,20 @@
   padding-bottom: 2vh;
 }
 
+.game__main--form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .country-form__input {
+  width: 60%;
   padding: 8px;
 }
 .country-form__button {
   background-color: #F7FFBD;
   color: #5D3A3A;
   padding: 8px;
+  border: 1px solid #5D3A3A;
 }/*# sourceMappingURL=style.css.map */
