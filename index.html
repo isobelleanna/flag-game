@@ -37,18 +37,19 @@
           <form class="game__main--form" id="country-form">
             <label for="country-input"></label>
             <input
+              class="country-form__input"
               id="country-input"
               type="search"
-              list="country-list"
+              list="country-form__list"
               placeholder="Guess the country"
             />
-            <datalist id="country-list">
+            <datalist id="country-form__list">
               <option value="bangladesh">bangladesh</option>
               <option value="barbados">barbados</option>
               <option value="belarus">belarus</option>
               <option value="belgium">belgium</option>
             </datalist>
-            <input class="country__button" type="submit" />
+            <input class="country-form__button" type="submit" />
           </form>
         </main>
       </div>

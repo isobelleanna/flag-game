@@ -33,7 +33,7 @@
         @include verticalPadding();
     }&__main--div {
         @include verticalPadding();
-        width: 270px;
+        width: 70%;
         margin: 1vh;
         background-color: $colour-background-secondary;
         @include horizontalPadding();

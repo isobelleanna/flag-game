@@ -1,0 +1,13 @@
+@use "./mixins" as *;
+@use "./variables" as *;
+
+.country-form {
+    &__input {
+        padding: 8px;
+    }
+    &__button {
+        background-color: $colour-background-secondary;
+        color: $colour-font-primary;
+        padding: 8px;
+    }
+}
