@@ -50,7 +50,9 @@ var isFourthGuess = false;
 var isFifthGuess = false;
 var isSixthGuess = false;
 var correctCountry = "";
-var correctContinent = ""; //----------------------------------------------Random------------------------------------------------------------------
+var correctContinent = "";
+var userGuessesArr = [];
+var score = 0; //----------------------------------------------Random------------------------------------------------------------------
 
 var generateRandom = function generateRandom() {
   return Math.floor(Math.random() * 4);
@@ -58,8 +60,9 @@ var generateRandom = function generateRandom() {
 
 
 countriesArr.forEach(function (countryobj) {
-  countryDatalist.innerHTML += "<option value=".concat(countryobj.country, ">").concat(countryobj.country, "</option>");
-}); //----------------------------------------------New Flag------------------------------------------------------------------
+  countryDatalist.innerHTML += "<option class=\"options\" value=".concat(countryobj.country, ">").concat(countryobj.country, "</option>");
+});
+var countryOptions = document.querySelectorAll(".options"); //----------------------------------------------New Flag------------------------------------------------------------------
 
 var createNewFlag = function createNewFlag(array) {
   var random = generateRandom();
@@ -93,6 +96,9 @@ var onClickRefresh = function onClickRefresh(event) {
     heading.innerText = "";
   });
   errorParagraph.innerText = "";
+  countryOptions.forEach(function (option) {
+    option.disabled = false;
+  });
 }; //----------------------------------------------Submit Country Form----------------------------------------------------------------------
 
 
@@ -113,6 +119,11 @@ var onSubmitCountryForm = function onSubmitCountryForm(event) {
     errorParagraph.innerText = "Invalid Country, Please try again.";
     return;
   }
+
+  var index = countriesArr.findIndex(function (object) {
+    return object.country === usersCountryInput;
+  });
+  countryOptions[index].disabled = true;
 
   if (isFirstGuess === false) {
     allGuessHeadings[0].innerText = usersCountryInput;

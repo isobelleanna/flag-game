@@ -59,6 +59,8 @@ let isFifthGuess = false;
 let isSixthGuess = false;
 let correctCountry = "";
 let correctContinent = "";
+let userGuessesArr = [];
+let score = 0;
 
 //----------------------------------------------Random------------------------------------------------------------------
 const generateRandom = () =>  {
@@ -67,8 +69,9 @@ const generateRandom = () =>  {
 
 //----------------------------------------------Generate Option List------------------------------------------------------------------
 countriesArr.forEach(countryobj => {
-    countryDatalist.innerHTML += `<option value=${countryobj.country}>${countryobj.country}</option>`
+    countryDatalist.innerHTML += `<option class="options" value=${countryobj.country}>${countryobj.country}</option>`
 });
+const countryOptions = document.querySelectorAll(".options");
 
 //----------------------------------------------New Flag------------------------------------------------------------------
 const createNewFlag = (array) => {
@@ -115,6 +118,9 @@ const onClickRefresh = (event) => {
         heading.innerText = ""
     });
     errorParagraph.innerText = ""
+    countryOptions.forEach(option => {
+        option.disabled = false;
+    });
 }
 
 //----------------------------------------------Submit Country Form----------------------------------------------------------------------
@@ -130,6 +136,10 @@ const onSubmitCountryForm = (event) => {
         errorParagraph.innerText = "Invalid Country, Please try again."
         return
     }
+    const index = countriesArr.findIndex(object => {
+        return object.country === usersCountryInput;
+    })
+    countryOptions[index].disabled = true;
     if (isFirstGuess === false) {
         allGuessHeadings[0].innerText = usersCountryInput;
         isItAMatch(usersCountryInput);
