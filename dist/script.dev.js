@@ -42,6 +42,7 @@ var allGuessHeadings = document.querySelectorAll(".game__main--h2");
 var correctHeadings = document.querySelectorAll(".game__main--h3");
 var correctContinentHeading = document.querySelectorAll(".game__main--h4");
 var errorParagraph = document.querySelector(".game__p--error");
+var countryDatalist = document.querySelector(".country-datalist");
 var isFirstGuess = false;
 var isSecondGuess = false;
 var isThirdGuess = false;
@@ -53,8 +54,12 @@ var correctContinent = ""; //----------------------------------------------Rando
 
 var generateRandom = function generateRandom() {
   return Math.floor(Math.random() * 4);
-}; //----------------------------------------------New Flag------------------------------------------------------------------
+}; //----------------------------------------------Generate Option List------------------------------------------------------------------
 
+
+countriesArr.forEach(function (countryobj) {
+  countryDatalist.innerHTML += "<option value=".concat(countryobj.country, ">").concat(countryobj.country, "</option>");
+}); //----------------------------------------------New Flag------------------------------------------------------------------
 
 var createNewFlag = function createNewFlag(array) {
   var random = generateRandom();

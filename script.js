@@ -50,6 +50,7 @@ const allGuessHeadings = document.querySelectorAll(".game__main--h2");
 const correctHeadings = document.querySelectorAll(".game__main--h3");
 const correctContinentHeading = document.querySelectorAll(".game__main--h4");
 const errorParagraph = document.querySelector(".game__p--error");
+const countryDatalist = document.querySelector(".country-datalist");
 let isFirstGuess = false;
 let isSecondGuess = false;
 let isThirdGuess = false;
@@ -63,6 +64,11 @@ let correctContinent = "";
 const generateRandom = () =>  {
      return Math.floor(Math.random() * 4)
 }
+
+//----------------------------------------------Generate Option List------------------------------------------------------------------
+countriesArr.forEach(countryobj => {
+    countryDatalist.innerHTML += `<option value=${countryobj.country}>${countryobj.country}</option>`
+});
 
 //----------------------------------------------New Flag------------------------------------------------------------------
 const createNewFlag = (array) => {
