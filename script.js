@@ -7,7 +7,7 @@ const countriesArr = [
      {
         country : "barbados",
         flag: "https://upload.wikimedia.org/wikipedia/commons/e/ef/Flag_of_Barbados.svg",
-        continent: "Americas"
+        continent: "americas"
     },
     {
         country : "belarus",
@@ -18,6 +18,26 @@ const countriesArr = [
         country : "belgium",
         flag: "https://upload.wikimedia.org/wikipedia/commons/9/92/Flag_of_Belgium_%28civil%29.svg",
         continent: "europe"
+    },
+    {
+        country : "belize",
+        flag: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Flag_of_Belize.svg",
+        continent: "americas"
+    },
+    {
+        country : "benin",
+        flag: "https://upload.wikimedia.org/wikipedia/commons/0/0a/Flag_of_Benin.svg",
+        continent: "africa"
+    },
+    {
+        country : "bhutan",
+        flag: "https://upload.wikimedia.org/wikipedia/commons/9/91/Flag_of_Bhutan.svg",
+        continent: "asia"
+    },
+     {
+        country : "bolivia",
+        flag: "https://upload.wikimedia.org/wikipedia/commons/4/48/Flag_of_Bolivia.svg",
+        continent: "americas"
     }
 ];
 
@@ -27,20 +47,17 @@ const imgContainer = document.querySelector(".game__img-container");
 const countryForm = document.querySelector("#country-form");
 const countryInput = document.getElementById("country-input");
 const allGuessHeadings = document.querySelectorAll(".game__main--h2");
-const correctHeadings = document.querySelectorAll(".game__main--h3")
-const firstGuess = document.querySelector(".game__main--h2-1");
-const secondGuess = document.querySelector(".game__main--h2-2");
-const thirdGuess = document.querySelector(".game__main--h2-3");
-const fourthGuess = document.querySelector(".game__main--h2-4");
-const fifthGuess = document.querySelector(".game__main--h2-5");
-const sixthGuess = document.querySelector(".game__main--h2-6");
+const correctHeadings = document.querySelectorAll(".game__main--h3");
+const correctContinentHeading = document.querySelectorAll(".game__main--h4");
+const errorParagraph = document.querySelector(".game__p--error");
 let isFirstGuess = false;
 let isSecondGuess = false;
 let isThirdGuess = false;
 let isFourthGuess = false;
 let isFifthGuess = false;
 let isSixthGuess = false;
-let correctAnswer = "";
+let correctCountry = "";
+let correctContinent = "";
 
 //----------------------------------------------Random------------------------------------------------------------------
 const generateRandom = () =>  {
@@ -50,7 +67,8 @@ const generateRandom = () =>  {
 //----------------------------------------------New Flag------------------------------------------------------------------
 const createNewFlag = (array) => {
     let random = generateRandom();
-    correctAnswer = `${array[random].country}`
+    correctCountry = `${array[random].country}`
+    correctContinent = `${array[random].continent}`
     return (
         `<img
            id="flag-img"
@@ -65,7 +83,8 @@ imgContainer.innerHTML = createNewFlag(countriesArr);
 //----------------------------------------------Refresh------------------------------------------------------------------
 const onClickRefresh = (event) => {
     let random = generateRandom();
-    correctAnswer = countriesArr[random].country;
+    correctCountry = countriesArr[random].country;
+    correctContinent = countriesArr[random].continent;
     allGuessHeadings.forEach(guess => {
         guess.innerText = "";
     });
@@ -82,55 +101,123 @@ const onClickRefresh = (event) => {
            src=${countriesArr[random].flag}
            alt=${countriesArr[random].country}
          />`
-
-    
+    correctHeadings.forEach(heading => {
+        heading.innerText = ""
+    });
+    countryInput.disabled = false
+    correctContinentHeading.forEach(heading => {
+        heading.innerText = ""
+    });
+    errorParagraph.innerText = ""
 }
 
 //----------------------------------------------Submit Country Form----------------------------------------------------------------------
 const onSubmitCountryForm = (event) => {
     event.preventDefault();
-    countryInput.innerText = "";
+    let usersCountryInput = event.target[0].value;
+    countryInput.value = "";
+    if(usersCountryInput === ""){return}
+    const isFound = countriesArr.some(element => {
+         return element.country === usersCountryInput ? true : false;
+    })
+    if(isFound === false){
+        errorParagraph.innerText = "Invalid Country, Please try again."
+        return
+    }
     if (isFirstGuess === false) {
-        firstGuess.innerText = event.target[0].value;
-        isFirstGuess = true;
-        isItAMatch(event.target[0].value);
+        allGuessHeadings[0].innerText = usersCountryInput;
+        isItAMatch(usersCountryInput);
         return;
     }
     if (isSecondGuess === false) {
-        secondGuess.innerText = event.target[0].value;
-        isSecondGuess = true;
-        isItAMatch(event.target[0].value);
+        allGuessHeadings[1].innerText = usersCountryInput;
+        isItAMatch(usersCountryInput);
         return;
     }
     if (isThirdGuess === false) {
-        thirdGuess.innerText = event.target[0].value;
-        isThirdGuess = true;
-        isItAMatch(event.target[0].value);
+        allGuessHeadings[2].innerText = usersCountryInput;
+        isItAMatch(usersCountryInput);
         return;
     }
     if (isFourthGuess === false) {
-        fourthGuess.innerText = event.target[0].value;
-        isFourthGuess = true;
-        isItAMatch(event.target[0].value);
+        allGuessHeadings[3].innerText = usersCountryInput;
+        isItAMatch(usersCountryInput);
         return;
     }
     if (isFifthGuess === false) {
-        fifthGuess.innerText = event.target[0].value;
-        isFifthGuess = true;
-        isItAMatch(event.target[0].value);
+        allGuessHeadings[4].innerText = usersCountryInput;
+        isItAMatch(usersCountryInput);
         return;
     }
     if (isSixthGuess === false) {
-        sixthGuess.innerText = event.target[0].value;
-        isSixthGuess = true;
-        isItAMatch(event.target[0].value);
+        allGuessHeadings[5].innerText = usersCountryInput;
+        isItAMatch(usersCountryInput);
         return;
     }
 }
 
-//----------------------------------------------Is There a match---------------------------------------------------------------------
+//----------------------------------------------Is The Country a Match---------------------------------------------------------------------
 const isItAMatch = (string) => {
-    string === correctAnswer ? alert("Correct"): console.log("Incorrect");
+    if(string === correctCountry) {
+        alert("Correct")
+        countryInput.disabled = true
+    }
+    if (isFirstGuess === false) {
+        string === correctCountry ? correctHeadings[0].innerText = "✅": correctHeadings[0].innerText = "❌";
+        itsAContinentMatch(string)
+        return;
+    }if (isSecondGuess === false) {
+        string === correctCountry ? correctHeadings[1].innerText = "✅": correctHeadings[1].innerText = "❌";
+        itsAContinentMatch(string)
+        return
+    }if (isThirdGuess === false) {
+        string === correctCountry ? correctHeadings[2].innerText = "✅": correctHeadings[2].innerText = "❌";
+        itsAContinentMatch(string)
+        return
+    }if (isFourthGuess === false) {
+        string === correctCountry ? correctHeadings[3].innerText = "✅": correctHeadings[3].innerText = "❌";
+        itsAContinentMatch(string)
+        return
+    }if (isFifthGuess === false) {
+        string === correctCountry ? correctHeadings[4].innerText = "✅": correctHeadings[4].innerText = "❌";
+        itsAContinentMatch(string)
+        return
+    }if (isSixthGuess === false) {
+        string === correctCountry ? correctHeadings[5].innerText = "✅": correctHeadings[5].innerText = "❌";
+        itsAContinentMatch(string)
+    }
+    countryInput.disabled = true
+    alert(`The correct answer is .... ${correctCountry}`)
+
+}
+//----------------------------------------------Is The Continent a Match------------------------------------------------------------------
+const itsAContinentMatch = (string) => {
+    let obj = countriesArr.find(obj => obj.country === string);
+    let userContinent = obj.continent;
+    if (isFirstGuess === false) {
+        correctContinent === userContinent ? correctContinentHeading[0].innerText = "Continent: ✅": correctContinentHeading[0].innerText = "Continent: ❌";
+        isFirstGuess = true;
+        return;
+    }if (isSecondGuess === false) {
+        correctContinent === userContinent ? correctContinentHeading[1].innerText = "Continent: ✅": correctContinentHeading[1].innerText = "Continent: ❌";
+        isSecondGuess = true;
+        return
+    }if (isThirdGuess === false) {
+        correctContinent === userContinent ? correctContinentHeading[2].innerText = "Continent: ✅": correctContinentHeading[2].innerText = "Continent: ❌";
+        isThirdGuess = true;
+        return
+    }if (isFourthGuess === false) {
+        correctContinent === userContinent ? correctContinentHeading[3].innerText = "Continent: ✅": correctContinentHeading[3].innerText = "Continent: ❌";
+        isFourthGuess = true;
+        return
+    }if (isFifthGuess === false) {
+        correctContinent === userContinent ? correctContinentHeading[4].innerText = "Continent: ✅": correctContinentHeading[4].innerText = "Continent: ❌";
+        isFifthGuess = true;
+        return
+    }if (isSixthGuess === false) {
+        correctContinent === userContinent ? correctContinentHeading[5].innerText = "Continent: ✅": correctContinentHeading[5].innerText = "Continent: ❌";
+        isSixthGuess = true;
+    }
 }
 
 //----------------------------------------------Event Listeners------------------------------------------------------------------
