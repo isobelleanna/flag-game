@@ -26,7 +26,6 @@
   justify-content: center;
   padding-top: 2vh;
   padding-bottom: 2vh;
-  font-size: 12px;
 }
 .game__main--img {
   width: 70%;
@@ -49,4 +48,16 @@
 .game__main--form {
   padding-top: 2vh;
   padding-bottom: 2vh;
+}
+.game__main--h2 {
+  font-size: 12px;
+  padding-right: 2px;
+}
+.game__main--h3 {
+  font-size: 12px;
+}
+.game__main--h4 {
+  font-size: 12px;
+  padding-left: 2vh;
+  padding-right: 2vh;
 }
