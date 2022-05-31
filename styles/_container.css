@@ -61,3 +61,10 @@
   padding-left: 2vh;
   padding-right: 2vh;
 }
+
+@media screen and (min-width: 580px) {
+  /* ipad and laptop screen */
+  body {
+    max-width: 450px;
+  }
+}

@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap");
 * {
   padding: 0;
   margin: 0;
@@ -10,7 +11,7 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  font-family: arial;
+  font-family: "Yeseva One", cursive;
   background-color: #F7FFBD;
   color: #5D3A3A;
 }
@@ -28,7 +29,7 @@
 }
 
 .game {
-  font-family: arial;
+  font-family: "Yeseva One", cursive;
   color: #5D3A3A;
   border: 1px solid #5D3A3A;
   background-color: #B5E0BA;
@@ -84,6 +85,12 @@
   padding-right: 2vh;
 }
 
+@media screen and (min-width: 580px) {
+  /* ipad and laptop screen */
+  body {
+    max-width: 450px;
+  }
+}
 .game__main--form {
   width: 100%;
   display: flex;
