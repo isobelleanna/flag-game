@@ -1,39 +1,10 @@
 "use strict";
 
-var countriesArr = [{
-  country: "bangladesh",
-  flag: "https://upload.wikimedia.org/wikipedia/commons/f/f9/Flag_of_Bangladesh.svg",
-  continent: "asia"
-}, {
-  country: "barbados",
-  flag: "https://upload.wikimedia.org/wikipedia/commons/e/ef/Flag_of_Barbados.svg",
-  continent: "americas"
-}, {
-  country: "belarus",
-  flag: "https://upload.wikimedia.org/wikipedia/commons/8/85/Flag_of_Belarus.svg",
-  continent: "europe"
-}, {
-  country: "belgium",
-  flag: "https://upload.wikimedia.org/wikipedia/commons/9/92/Flag_of_Belgium_%28civil%29.svg",
-  continent: "europe"
-}, {
-  country: "belize",
-  flag: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Flag_of_Belize.svg",
-  continent: "americas"
-}, {
-  country: "benin",
-  flag: "https://upload.wikimedia.org/wikipedia/commons/0/0a/Flag_of_Benin.svg",
-  continent: "africa"
-}, {
-  country: "bhutan",
-  flag: "https://upload.wikimedia.org/wikipedia/commons/9/91/Flag_of_Bhutan.svg",
-  continent: "asia"
-}, {
-  country: "bolivia",
-  flag: "https://upload.wikimedia.org/wikipedia/commons/4/48/Flag_of_Bolivia.svg",
-  continent: "americas"
-}]; //----------------------------------------------Variables------------------------------------------------------------------
+var _countries = _interopRequireDefault(require("./data/countries.js"));
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+//----------------------------------------------Variables------------------------------------------------------------------
 var refreshButton = document.getElementById("refresh");
 var imgContainer = document.querySelector(".game__img-container");
 var countryForm = document.querySelector("#country-form");
@@ -55,13 +26,18 @@ var userGuessesArr = [];
 var score = 0; //----------------------------------------------Random------------------------------------------------------------------
 
 var generateRandom = function generateRandom() {
-  return Math.floor(Math.random() * 4);
+  return Math.floor(Math.random() * _countries["default"].length);
+};
+
+var hasCountryBeenPlayed = function hasCountryBeenPlayed() {
+  console.log(1);
 }; //----------------------------------------------Generate Option List------------------------------------------------------------------
 
 
-countriesArr.forEach(function (countryobj) {
-  countryDatalist.innerHTML += "<option class=\"options\" value=".concat(countryobj.country, ">").concat(countryobj.country, "</option>");
+_countries["default"].forEach(function (countryObj) {
+  countryDatalist.innerHTML += "<option class=\"options\" value=".concat(countryObj.country, ">").concat(countryObj.country, "</option>");
 });
+
 var countryOptions = document.querySelectorAll(".options"); //----------------------------------------------New Flag------------------------------------------------------------------
 
 var createNewFlag = function createNewFlag(array) {
@@ -71,12 +47,12 @@ var createNewFlag = function createNewFlag(array) {
   return "<img\n           id=\"flag-img\"\n           class=\"game__main--img\"\n           src=".concat(array[random].flag, "\n           alt=").concat(array[random].country, "\n         />");
 };
 
-imgContainer.innerHTML = createNewFlag(countriesArr); //----------------------------------------------Refresh------------------------------------------------------------------
+imgContainer.innerHTML = createNewFlag(_countries["default"]); //----------------------------------------------Refresh------------------------------------------------------------------
 
 var onClickRefresh = function onClickRefresh(event) {
   var random = generateRandom();
-  correctCountry = countriesArr[random].country;
-  correctContinent = countriesArr[random].continent;
+  correctCountry = _countries["default"][random].country;
+  correctContinent = _countries["default"][random].continent;
   allGuessHeadings.forEach(function (guess) {
     guess.innerText = "";
   });
@@ -87,7 +63,7 @@ var onClickRefresh = function onClickRefresh(event) {
   isFourthGuess = false;
   isFifthGuess = false;
   isSixthGuess = false;
-  imgContainer.innerHTML = "<img\n           id=\"flag-img\"\n           class=\"game__main--img\"\n           src=".concat(countriesArr[random].flag, "\n           alt=").concat(countriesArr[random].country, "\n         />");
+  imgContainer.innerHTML = "<img\n           id=\"flag-img\"\n           class=\"game__main--img\"\n           src=".concat(_countries["default"][random].flag, "\n           alt=").concat(_countries["default"][random].country, "\n         />");
   correctHeadings.forEach(function (heading) {
     heading.innerText = "";
   });
@@ -111,7 +87,7 @@ var onSubmitCountryForm = function onSubmitCountryForm(event) {
     return;
   }
 
-  var isFound = countriesArr.some(function (element) {
+  var isFound = _countries["default"].some(function (element) {
     return element.country === usersCountryInput ? true : false;
   });
 
@@ -120,9 +96,10 @@ var onSubmitCountryForm = function onSubmitCountryForm(event) {
     return;
   }
 
-  var index = countriesArr.findIndex(function (object) {
+  var index = _countries["default"].findIndex(function (object) {
     return object.country === usersCountryInput;
   });
+
   countryOptions[index].disabled = true;
 
   if (isFirstGuess === false) {
@@ -210,9 +187,10 @@ var isItAMatch = function isItAMatch(string) {
 
 
 var itsAContinentMatch = function itsAContinentMatch(string) {
-  var obj = countriesArr.find(function (obj) {
+  var obj = _countries["default"].find(function (obj) {
     return obj.country === string;
   });
+
   var userContinent = obj.continent;
 
   if (isFirstGuess === false) {
