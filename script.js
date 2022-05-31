@@ -20,13 +20,13 @@ let correctCountry = "";
 let correctContinent = "";
 let userGuessesArr = [];
 let countryIdPlayed = [];
-let index = 0
+let index = 0;
 let score = 0;
 let randomCountryId = 0;
 
 //----------------------------------------------Generate an array of numbers------------------------------------------------------------------
 const generateAnArrayOfNumber = () => {
-    for (let i = 0; i < countriesArr.length; i++) {
+    for (let i = 1; i < countriesArr.length; i++) {
         countryIdPlayed.push(i)
     }
 }
@@ -48,7 +48,6 @@ const removedCountryIdPlayed = () => {
     return countryIdPlayed
 }
 
-console.log(removedCountryIdPlayed())
 
 //----------------------------------------------Random------------------------------------------------------------------
 const generateRandom = () =>  {
@@ -76,15 +75,14 @@ const countryOptions = document.querySelectorAll(".options");
 
 //----------------------------------------------New Flag------------------------------------------------------------------
 const createNewFlag = (array) => {
-    let random = generateRandom();
-    correctCountry = `${array[random].country}`
-    correctContinent = `${array[random].continent}`
+    correctCountry = `${array[randomCountryId].country}`
+    correctContinent = `${array[randomCountryId].continent}`
     return (
         `<img
            id="flag-img"
            class="game__main--img"
-           src=${array[random].flag}
-           alt=${array[random].country}
+           src=${array[randomCountryId].flag}
+           alt=${array[randomCountryId].country}
          />`
  )
 }
@@ -92,9 +90,8 @@ imgContainer.innerHTML = createNewFlag(countriesArr);
 
 //----------------------------------------------Refresh------------------------------------------------------------------
 const onClickRefresh = (event) => {
-    let random = generateRandom();
-    correctCountry = countriesArr[random].country;
-    correctContinent = countriesArr[random].continent;
+    correctCountry = countriesArr[randomCountryId].country;
+    correctContinent = countriesArr[randomCountryId].continent;
     allGuessHeadings.forEach(guess => {
         guess.innerText = "";
     });
@@ -108,8 +105,8 @@ const onClickRefresh = (event) => {
     imgContainer.innerHTML = `<img
            id="flag-img"
            class="game__main--img"
-           src=${countriesArr[random].flag}
-           alt=${countriesArr[random].country}
+           src=${countriesArr[randomCountryId].flag}
+           alt=${countriesArr[randomCountryId].country}
          />`
     correctHeadings.forEach(heading => {
         heading.innerText = ""
@@ -122,11 +119,17 @@ const onClickRefresh = (event) => {
     countryOptions.forEach(option => {
         option.disabled = false;
     });
+    removedCountryIdPlayed()
+    console.log(countryIdPlayed)
 }
-//----------------------------------------------Continue------------------------------------------------------------------
+//----------------------------------------------New Game------------------------------------------------------------------
 const onClickStartNewGame = (event) => {
     onClickRefresh();
     score = 0;
+    countryIdPlayed = []
+    generateAnArrayOfNumber()
+    selectCountryId()
+    console.log(countryIdPlayed)
 }
 
 //----------------------------------------------Submit Country Form----------------------------------------------------------------------
@@ -142,10 +145,10 @@ const onSubmitCountryForm = (event) => {
         errorParagraph.innerText = "Invalid Country, Please try again."
         return
     }
-    const index = countriesArr.findIndex(object => {
+    const indexOfOptions = countriesArr.findIndex(object => {
         return object.country === usersCountryInput;
     })
-    countryOptions[index].disabled = true;
+    countryOptions[indexOfOptions].disabled = true;
     if (isFirstGuess === false) {
         allGuessHeadings[0].innerText = usersCountryInput;
         isItAMatch(usersCountryInput);

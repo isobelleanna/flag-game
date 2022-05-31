@@ -30,7 +30,7 @@ var score = 0;
 var randomCountryId = 0; //----------------------------------------------Generate an array of numbers------------------------------------------------------------------
 
 var generateAnArrayOfNumber = function generateAnArrayOfNumber() {
-  for (var i = 0; i < _countries["default"].length; i++) {
+  for (var i = 1; i < _countries["default"].length; i++) {
     countryIdPlayed.push(i);
   }
 };
@@ -52,9 +52,8 @@ var removedCountryIdPlayed = function removedCountryIdPlayed() {
   selectCountryId();
   countryIdPlayed.splice(index, 1);
   return countryIdPlayed;
-};
+}; //----------------------------------------------Random------------------------------------------------------------------
 
-console.log(removedCountryIdPlayed()); //----------------------------------------------Random------------------------------------------------------------------
 
 var generateRandom = function generateRandom() {
   return Math.floor(Math.random() * _countries["default"].length);
@@ -83,18 +82,16 @@ _countries["default"].forEach(function (countryObj) {
 var countryOptions = document.querySelectorAll(".options"); //----------------------------------------------New Flag------------------------------------------------------------------
 
 var createNewFlag = function createNewFlag(array) {
-  var random = generateRandom();
-  correctCountry = "".concat(array[random].country);
-  correctContinent = "".concat(array[random].continent);
-  return "<img\n           id=\"flag-img\"\n           class=\"game__main--img\"\n           src=".concat(array[random].flag, "\n           alt=").concat(array[random].country, "\n         />");
+  correctCountry = "".concat(array[randomCountryId].country);
+  correctContinent = "".concat(array[randomCountryId].continent);
+  return "<img\n           id=\"flag-img\"\n           class=\"game__main--img\"\n           src=".concat(array[randomCountryId].flag, "\n           alt=").concat(array[randomCountryId].country, "\n         />");
 };
 
 imgContainer.innerHTML = createNewFlag(_countries["default"]); //----------------------------------------------Refresh------------------------------------------------------------------
 
 var onClickRefresh = function onClickRefresh(event) {
-  var random = generateRandom();
-  correctCountry = _countries["default"][random].country;
-  correctContinent = _countries["default"][random].continent;
+  correctCountry = _countries["default"][randomCountryId].country;
+  correctContinent = _countries["default"][randomCountryId].continent;
   allGuessHeadings.forEach(function (guess) {
     guess.innerText = "";
   });
@@ -105,7 +102,7 @@ var onClickRefresh = function onClickRefresh(event) {
   isFourthGuess = false;
   isFifthGuess = false;
   isSixthGuess = false;
-  imgContainer.innerHTML = "<img\n           id=\"flag-img\"\n           class=\"game__main--img\"\n           src=".concat(_countries["default"][random].flag, "\n           alt=").concat(_countries["default"][random].country, "\n         />");
+  imgContainer.innerHTML = "<img\n           id=\"flag-img\"\n           class=\"game__main--img\"\n           src=".concat(_countries["default"][randomCountryId].flag, "\n           alt=").concat(_countries["default"][randomCountryId].country, "\n         />");
   correctHeadings.forEach(function (heading) {
     heading.innerText = "";
   });
@@ -117,12 +114,18 @@ var onClickRefresh = function onClickRefresh(event) {
   countryOptions.forEach(function (option) {
     option.disabled = false;
   });
-}; //----------------------------------------------Continue------------------------------------------------------------------
+  removedCountryIdPlayed();
+  console.log(countryIdPlayed);
+}; //----------------------------------------------New Game------------------------------------------------------------------
 
 
 var onClickStartNewGame = function onClickStartNewGame(event) {
   onClickRefresh();
   score = 0;
+  countryIdPlayed = [];
+  generateAnArrayOfNumber();
+  selectCountryId();
+  console.log(countryIdPlayed);
 }; //----------------------------------------------Submit Country Form----------------------------------------------------------------------
 
 
@@ -144,11 +147,11 @@ var onSubmitCountryForm = function onSubmitCountryForm(event) {
     return;
   }
 
-  var index = _countries["default"].findIndex(function (object) {
+  var indexOfOptions = _countries["default"].findIndex(function (object) {
     return object.country === usersCountryInput;
   });
 
-  countryOptions[index].disabled = true;
+  countryOptions[indexOfOptions].disabled = true;
 
   if (isFirstGuess === false) {
     allGuessHeadings[0].innerText = usersCountryInput;
