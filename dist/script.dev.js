@@ -14,6 +14,7 @@ var correctHeadings = document.querySelectorAll(".game__main--h3");
 var correctContinentHeading = document.querySelectorAll(".game__main--h4");
 var errorParagraph = document.querySelector(".game__p--error");
 var countryDatalist = document.querySelector(".country-datalist");
+var continueGameButton = document.getElementById("continue-game");
 var isFirstGuess = false;
 var isSecondGuess = false;
 var isThirdGuess = false;
@@ -23,14 +24,55 @@ var isSixthGuess = false;
 var correctCountry = "";
 var correctContinent = "";
 var userGuessesArr = [];
-var score = 0; //----------------------------------------------Random------------------------------------------------------------------
+var countryIdPlayed = [];
+var index = 0;
+var score = 0;
+var randomCountryId = 0; //----------------------------------------------Generate an array of numbers------------------------------------------------------------------
+
+var generateAnArrayOfNumber = function generateAnArrayOfNumber() {
+  for (var i = 0; i < _countries["default"].length; i++) {
+    countryIdPlayed.push(i);
+  }
+};
+
+generateAnArrayOfNumber();
+
+var selectCountryId = function selectCountryId() {
+  if (countryIdPlayed.length === 0) {
+    alert("You have played every country");
+  }
+
+  console.log(countryIdPlayed);
+  index = Math.floor(Math.random() * countryIdPlayed.length);
+  console.log(index);
+  randomCountryId = countryIdPlayed[index];
+};
+
+var removedCountryIdPlayed = function removedCountryIdPlayed() {
+  selectCountryId();
+  countryIdPlayed.splice(index, 1);
+  return countryIdPlayed;
+};
+
+console.log(removedCountryIdPlayed()); //----------------------------------------------Random------------------------------------------------------------------
 
 var generateRandom = function generateRandom() {
   return Math.floor(Math.random() * _countries["default"].length);
 };
 
 var hasCountryBeenPlayed = function hasCountryBeenPlayed() {
-  console.log(1);
+  if (countryIdPlayed.length === _countries["default"].length) {
+    console.log("finished");
+    return;
+  }
+
+  var random = generateRandom();
+  countryIdPlayed.push(random);
+  console.log(countryIdPlayed);
+
+  while (countryIdPlayed.includes(random)) {
+    random += 1;
+  }
 }; //----------------------------------------------Generate Option List------------------------------------------------------------------
 
 
@@ -75,6 +117,12 @@ var onClickRefresh = function onClickRefresh(event) {
   countryOptions.forEach(function (option) {
     option.disabled = false;
   });
+}; //----------------------------------------------Continue------------------------------------------------------------------
+
+
+var onClickStartNewGame = function onClickStartNewGame(event) {
+  onClickRefresh();
+  score = 0;
 }; //----------------------------------------------Submit Country Form----------------------------------------------------------------------
 
 
@@ -142,7 +190,8 @@ var onSubmitCountryForm = function onSubmitCountryForm(event) {
 
 var isItAMatch = function isItAMatch(string) {
   if (string === correctCountry) {
-    alert("Correct");
+    score += 1;
+    alert("Correct! Your current score is ".concat(score));
     countryInput.disabled = true;
   }
 
@@ -230,5 +279,6 @@ var itsAContinentMatch = function itsAContinentMatch(string) {
 }; //----------------------------------------------Event Listeners------------------------------------------------------------------
 
 
-refreshButton.addEventListener('click', onClickRefresh);
+refreshButton.addEventListener('click', onClickStartNewGame);
 countryForm.addEventListener('submit', onSubmitCountryForm);
+continueGameButton.addEventListener("click", onClickRefresh);

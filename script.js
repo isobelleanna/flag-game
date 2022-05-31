@@ -9,6 +9,7 @@ const correctHeadings = document.querySelectorAll(".game__main--h3");
 const correctContinentHeading = document.querySelectorAll(".game__main--h4");
 const errorParagraph = document.querySelector(".game__p--error");
 const countryDatalist = document.querySelector(".country-datalist");
+const continueGameButton = document.getElementById("continue-game");
 let isFirstGuess = false;
 let isSecondGuess = false;
 let isThirdGuess = false;
@@ -18,7 +19,36 @@ let isSixthGuess = false;
 let correctCountry = "";
 let correctContinent = "";
 let userGuessesArr = [];
+let countryIdPlayed = [];
+let index = 0
 let score = 0;
+let randomCountryId = 0;
+
+//----------------------------------------------Generate an array of numbers------------------------------------------------------------------
+const generateAnArrayOfNumber = () => {
+    for (let i = 0; i < countriesArr.length; i++) {
+        countryIdPlayed.push(i)
+    }
+}
+generateAnArrayOfNumber()
+
+const selectCountryId = () => {
+    if (countryIdPlayed.length === 0){
+        alert("You have played every country")
+    }
+    console.log(countryIdPlayed)
+    index = Math.floor(Math.random() * countryIdPlayed.length)
+    console.log(index)
+    randomCountryId = countryIdPlayed[index]
+}
+
+const removedCountryIdPlayed = () => {
+    selectCountryId();
+    countryIdPlayed.splice(index, 1)
+    return countryIdPlayed
+}
+
+console.log(removedCountryIdPlayed())
 
 //----------------------------------------------Random------------------------------------------------------------------
 const generateRandom = () =>  {
@@ -26,9 +56,18 @@ const generateRandom = () =>  {
 }
 
 const hasCountryBeenPlayed = () => {
-    console.log(1)
+    if (countryIdPlayed.length === countriesArr.length) {
+        console.log("finished")
+        return
+    }
+    let random = generateRandom();
+    countryIdPlayed.push(random);
+    console.log(countryIdPlayed);
+    while(countryIdPlayed.includes(random)){
+        random += 1;
+    }
+    
 }
-
 //----------------------------------------------Generate Option List------------------------------------------------------------------
 countriesArr.forEach(countryObj => {
     countryDatalist.innerHTML += `<option class="options" value=${countryObj.country}>${countryObj.country}</option>`
@@ -84,6 +123,11 @@ const onClickRefresh = (event) => {
         option.disabled = false;
     });
 }
+//----------------------------------------------Continue------------------------------------------------------------------
+const onClickStartNewGame = (event) => {
+    onClickRefresh();
+    score = 0;
+}
 
 //----------------------------------------------Submit Country Form----------------------------------------------------------------------
 const onSubmitCountryForm = (event) => {
@@ -137,7 +181,8 @@ const onSubmitCountryForm = (event) => {
 //----------------------------------------------Is The Country a Match---------------------------------------------------------------------
 const isItAMatch = (string) => {
     if(string === correctCountry) {
-        alert("Correct")
+        score += 1
+        alert(`Correct! Your current score is ${score}`)
         countryInput.disabled = true
     }
     if (isFirstGuess === false) {
@@ -199,6 +244,7 @@ const itsAContinentMatch = (string) => {
 }
 
 //----------------------------------------------Event Listeners------------------------------------------------------------------
-refreshButton.addEventListener('click', onClickRefresh)
+refreshButton.addEventListener('click', onClickStartNewGame)
 countryForm.addEventListener('submit', onSubmitCountryForm)
+continueGameButton.addEventListener("click", onClickRefresh)
 
