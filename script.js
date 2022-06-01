@@ -23,7 +23,7 @@ let countryIdPlayed = [];
 let index = 0;
 let score = 0;
 let randomCountryId = 0;
-continueGameButton.disabled = true;
+//continueGameButton.disabled = true;
 refreshButton.disabled = true;
 
 //----------------------------------------------Generate an array of numbers------------------------------------------------------------------
@@ -248,10 +248,10 @@ const distanceCalculation = (userLat, userLong, correctLat, correctLong) => {
 const updateDistanceCalculationHeading = (string) => {
     let obj = countriesArr.find(obj => obj.country === string);
     let correctObj = countriesArr.find(obj => obj.country === correctCountry)
-    let userLat = obj.latutude;
-    let userLong = obj.longitutue;
-    let correctLat = correctObj.latutude;
-    let correctLong = correctObj.longitutue;
+    let userLat = obj.latitude;
+    let userLong = obj.longitude;
+    let correctLat = correctObj.latitude;
+    let correctLong = correctObj.longitude;
     console.log(distanceCalculation(userLat, userLong, correctLat, correctLong))
     const distance = distanceCalculation(userLat, userLong, correctLat, correctLong)
     if (isFirstGuess === false) {

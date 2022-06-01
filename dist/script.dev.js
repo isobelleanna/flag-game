@@ -27,8 +27,8 @@ var correctContinent = "";
 var countryIdPlayed = [];
 var index = 0;
 var score = 0;
-var randomCountryId = 0;
-continueGameButton.disabled = true;
+var randomCountryId = 0; //continueGameButton.disabled = true;
+
 refreshButton.disabled = true; //----------------------------------------------Generate an array of numbers------------------------------------------------------------------
 
 var generateAnArrayOfNumber = function generateAnArrayOfNumber() {
@@ -287,10 +287,10 @@ var updateDistanceCalculationHeading = function updateDistanceCalculationHeading
     return obj.country === correctCountry;
   });
 
-  var userLat = obj.latutude;
-  var userLong = obj.longitutue;
-  var correctLat = correctObj.latutude;
-  var correctLong = correctObj.longitutue;
+  var userLat = obj.latitude;
+  var userLong = obj.longitude;
+  var correctLat = correctObj.latitude;
+  var correctLong = correctObj.longitude;
   console.log(distanceCalculation(userLat, userLong, correctLat, correctLong));
   var distance = distanceCalculation(userLat, userLong, correctLat, correctLong);
 
