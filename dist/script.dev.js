@@ -30,7 +30,7 @@ var score = 0;
 var randomCountryId = 0; //----------------------------------------------Generate an array of numbers------------------------------------------------------------------
 
 var generateAnArrayOfNumber = function generateAnArrayOfNumber() {
-  for (var i = 1; i < _countries["default"].length; i++) {
+  for (var i = 0; i < _countries["default"].length; i++) {
     countryIdPlayed.push(i);
   }
 };
@@ -38,40 +38,12 @@ var generateAnArrayOfNumber = function generateAnArrayOfNumber() {
 generateAnArrayOfNumber();
 
 var selectCountryId = function selectCountryId() {
-  if (countryIdPlayed.length === 0) {
-    alert("You have played every country");
-  }
-
-  console.log(countryIdPlayed);
   index = Math.floor(Math.random() * countryIdPlayed.length);
-  console.log(index);
   randomCountryId = countryIdPlayed[index];
 };
 
 var removedCountryIdPlayed = function removedCountryIdPlayed() {
-  selectCountryId();
-  countryIdPlayed.splice(index, 1);
-  return countryIdPlayed;
-}; //----------------------------------------------Random------------------------------------------------------------------
-
-
-var generateRandom = function generateRandom() {
-  return Math.floor(Math.random() * _countries["default"].length);
-};
-
-var hasCountryBeenPlayed = function hasCountryBeenPlayed() {
-  if (countryIdPlayed.length === _countries["default"].length) {
-    console.log("finished");
-    return;
-  }
-
-  var random = generateRandom();
-  countryIdPlayed.push(random);
-  console.log(countryIdPlayed);
-
-  while (countryIdPlayed.includes(random)) {
-    random += 1;
-  }
+  return countryIdPlayed.splice(index, 1);
 }; //----------------------------------------------Generate Option List------------------------------------------------------------------
 
 
@@ -82,6 +54,8 @@ _countries["default"].forEach(function (countryObj) {
 var countryOptions = document.querySelectorAll(".options"); //----------------------------------------------New Flag------------------------------------------------------------------
 
 var createNewFlag = function createNewFlag(array) {
+  selectCountryId();
+  removedCountryIdPlayed();
   correctCountry = "".concat(array[randomCountryId].country);
   correctContinent = "".concat(array[randomCountryId].continent);
   return "<img\n           id=\"flag-img\"\n           class=\"game__main--img\"\n           src=".concat(array[randomCountryId].flag, "\n           alt=").concat(array[randomCountryId].country, "\n         />");
@@ -90,6 +64,14 @@ var createNewFlag = function createNewFlag(array) {
 imgContainer.innerHTML = createNewFlag(_countries["default"]); //----------------------------------------------Refresh------------------------------------------------------------------
 
 var onClickRefresh = function onClickRefresh(event) {
+  if (countryIdPlayed.length === 0) {
+    continueGameButton.disabled = true;
+    errorParagraph.innerText = "You have played every flag.";
+    return;
+  }
+
+  selectCountryId();
+  removedCountryIdPlayed();
   correctCountry = _countries["default"][randomCountryId].country;
   correctContinent = _countries["default"][randomCountryId].continent;
   allGuessHeadings.forEach(function (guess) {
@@ -114,8 +96,6 @@ var onClickRefresh = function onClickRefresh(event) {
   countryOptions.forEach(function (option) {
     option.disabled = false;
   });
-  removedCountryIdPlayed();
-  console.log(countryIdPlayed);
 }; //----------------------------------------------New Game------------------------------------------------------------------
 
 
@@ -279,7 +259,10 @@ var itsAContinentMatch = function itsAContinentMatch(string) {
     correctContinent === userContinent ? correctContinentHeading[5].innerText = "Continent: ✅" : correctContinentHeading[5].innerText = "Continent: ❌";
     isSixthGuess = true;
   }
-}; //----------------------------------------------Event Listeners------------------------------------------------------------------
+}; //----------------------------------------------Is The Continent a Match------------------------------------------------------------------
+
+
+var distanceCalculation = function distanceCalculation(string) {}; //----------------------------------------------Event Listeners------------------------------------------------------------------
 
 
 refreshButton.addEventListener('click', onClickStartNewGame);

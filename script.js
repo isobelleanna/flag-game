@@ -26,47 +26,21 @@ let randomCountryId = 0;
 
 //----------------------------------------------Generate an array of numbers------------------------------------------------------------------
 const generateAnArrayOfNumber = () => {
-    for (let i = 1; i < countriesArr.length; i++) {
+    for (let i = 0; i < countriesArr.length; i++) {
         countryIdPlayed.push(i)
     }
 }
 generateAnArrayOfNumber()
 
 const selectCountryId = () => {
-    if (countryIdPlayed.length === 0){
-        alert("You have played every country")
-    }
-    console.log(countryIdPlayed)
     index = Math.floor(Math.random() * countryIdPlayed.length)
-    console.log(index)
     randomCountryId = countryIdPlayed[index]
 }
 
 const removedCountryIdPlayed = () => {
-    selectCountryId();
-    countryIdPlayed.splice(index, 1)
-    return countryIdPlayed
+     return countryIdPlayed.splice(index, 1)
 }
 
-
-//----------------------------------------------Random------------------------------------------------------------------
-const generateRandom = () =>  {
-     return Math.floor(Math.random() * countriesArr.length)
-}
-
-const hasCountryBeenPlayed = () => {
-    if (countryIdPlayed.length === countriesArr.length) {
-        console.log("finished")
-        return
-    }
-    let random = generateRandom();
-    countryIdPlayed.push(random);
-    console.log(countryIdPlayed);
-    while(countryIdPlayed.includes(random)){
-        random += 1;
-    }
-    
-}
 //----------------------------------------------Generate Option List------------------------------------------------------------------
 countriesArr.forEach(countryObj => {
     countryDatalist.innerHTML += `<option class="options" value=${countryObj.country}>${countryObj.country}</option>`
@@ -75,6 +49,8 @@ const countryOptions = document.querySelectorAll(".options");
 
 //----------------------------------------------New Flag------------------------------------------------------------------
 const createNewFlag = (array) => {
+    selectCountryId()
+    removedCountryIdPlayed()
     correctCountry = `${array[randomCountryId].country}`
     correctContinent = `${array[randomCountryId].continent}`
     return (
@@ -90,6 +66,13 @@ imgContainer.innerHTML = createNewFlag(countriesArr);
 
 //----------------------------------------------Refresh------------------------------------------------------------------
 const onClickRefresh = (event) => {
+    if (countryIdPlayed.length === 0){
+        continueGameButton.disabled = true
+        errorParagraph.innerText = "You have played every flag."
+        return
+    }
+    selectCountryId()
+    removedCountryIdPlayed()
     correctCountry = countriesArr[randomCountryId].country;
     correctContinent = countriesArr[randomCountryId].continent;
     allGuessHeadings.forEach(guess => {
@@ -119,8 +102,6 @@ const onClickRefresh = (event) => {
     countryOptions.forEach(option => {
         option.disabled = false;
     });
-    removedCountryIdPlayed()
-    console.log(countryIdPlayed)
 }
 //----------------------------------------------New Game------------------------------------------------------------------
 const onClickStartNewGame = (event) => {
@@ -245,7 +226,10 @@ const itsAContinentMatch = (string) => {
         isSixthGuess = true;
     }
 }
-
+//----------------------------------------------Is The Continent a Match------------------------------------------------------------------
+const distanceCalculation = (string) => {
+    
+}
 //----------------------------------------------Event Listeners------------------------------------------------------------------
 refreshButton.addEventListener('click', onClickStartNewGame)
 countryForm.addEventListener('submit', onSubmitCountryForm)
