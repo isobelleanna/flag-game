@@ -15,6 +15,7 @@ var correctContinentHeading = document.querySelectorAll(".game__main--h4");
 var errorParagraph = document.querySelector(".game__p--error");
 var countryDatalist = document.querySelector(".country-datalist");
 var continueGameButton = document.getElementById("continue-game");
+var coordinatesSubheading = document.querySelectorAll(".game__main--coordinates-subheading");
 var isFirstGuess = false;
 var isSecondGuess = false;
 var isThirdGuess = false;
@@ -23,11 +24,12 @@ var isFifthGuess = false;
 var isSixthGuess = false;
 var correctCountry = "";
 var correctContinent = "";
-var userGuessesArr = [];
 var countryIdPlayed = [];
 var index = 0;
 var score = 0;
-var randomCountryId = 0; //----------------------------------------------Generate an array of numbers------------------------------------------------------------------
+var randomCountryId = 0;
+continueGameButton.disabled = true;
+refreshButton.disabled = true; //----------------------------------------------Generate an array of numbers------------------------------------------------------------------
 
 var generateAnArrayOfNumber = function generateAnArrayOfNumber() {
   for (var i = 0; i < _countries["default"].length; i++) {
@@ -95,6 +97,9 @@ var onClickRefresh = function onClickRefresh(event) {
   errorParagraph.innerText = "";
   countryOptions.forEach(function (option) {
     option.disabled = false;
+  });
+  coordinatesSubheading.forEach(function (subheading) {
+    subheading.innerText = "";
   });
 }; //----------------------------------------------New Game------------------------------------------------------------------
 
@@ -176,6 +181,8 @@ var isItAMatch = function isItAMatch(string) {
     score += 1;
     alert("Correct! Your current score is ".concat(score));
     countryInput.disabled = true;
+    continueGameButton.disabled = false;
+    refreshButton.disabled = false;
   }
 
   if (isFirstGuess === false) {
@@ -213,6 +220,8 @@ var isItAMatch = function isItAMatch(string) {
     itsAContinentMatch(string);
   }
 
+  continueGameButton.disabled = false;
+  refreshButton.disabled = false;
   countryInput.disabled = true;
   alert("The correct answer is .... ".concat(correctCountry));
 }; //----------------------------------------------Is The Continent a Match------------------------------------------------------------------
@@ -227,42 +236,99 @@ var itsAContinentMatch = function itsAContinentMatch(string) {
 
   if (isFirstGuess === false) {
     correctContinent === userContinent ? correctContinentHeading[0].innerText = "Continent: ✅" : correctContinentHeading[0].innerText = "Continent: ❌";
-    isFirstGuess = true;
+    updateDistanceCalculationHeading(string);
     return;
   }
 
   if (isSecondGuess === false) {
     correctContinent === userContinent ? correctContinentHeading[1].innerText = "Continent: ✅" : correctContinentHeading[1].innerText = "Continent: ❌";
-    isSecondGuess = true;
+    updateDistanceCalculationHeading(string);
     return;
   }
 
   if (isThirdGuess === false) {
     correctContinent === userContinent ? correctContinentHeading[2].innerText = "Continent: ✅" : correctContinentHeading[2].innerText = "Continent: ❌";
-    isThirdGuess = true;
+    updateDistanceCalculationHeading(string);
     return;
   }
 
   if (isFourthGuess === false) {
     correctContinent === userContinent ? correctContinentHeading[3].innerText = "Continent: ✅" : correctContinentHeading[3].innerText = "Continent: ❌";
-    isFourthGuess = true;
+    updateDistanceCalculationHeading(string);
     return;
   }
 
   if (isFifthGuess === false) {
     correctContinent === userContinent ? correctContinentHeading[4].innerText = "Continent: ✅" : correctContinentHeading[4].innerText = "Continent: ❌";
-    isFifthGuess = true;
+    updateDistanceCalculationHeading(string);
     return;
   }
 
   if (isSixthGuess === false) {
     correctContinent === userContinent ? correctContinentHeading[5].innerText = "Continent: ✅" : correctContinentHeading[5].innerText = "Continent: ❌";
+    updateDistanceCalculationHeading(string);
+  }
+}; //----------------------------------------------Distance from answers------------------------------------------------------------------
+
+
+var distanceCalculation = function distanceCalculation(userLat, userLong, correctLat, correctLong) {
+  var degreeToRadians = Math.PI / 180;
+  var c = Math.cos;
+  var value = 0.5 - c((correctLat - userLat) * degreeToRadians) / 2 + c(userLat * degreeToRadians) * c(correctLat * degreeToRadians) * (1 - c((correctLong - userLong) * degreeToRadians)) / 2;
+  return Math.floor(12742 * Math.asin(Math.sqrt(value)));
+};
+
+var updateDistanceCalculationHeading = function updateDistanceCalculationHeading(string) {
+  var obj = _countries["default"].find(function (obj) {
+    return obj.country === string;
+  });
+
+  var correctObj = _countries["default"].find(function (obj) {
+    return obj.country === correctCountry;
+  });
+
+  var userLat = obj.latutude;
+  var userLong = obj.longitutue;
+  var correctLat = correctObj.latutude;
+  var correctLong = correctObj.longitutue;
+  console.log(distanceCalculation(userLat, userLong, correctLat, correctLong));
+  var distance = distanceCalculation(userLat, userLong, correctLat, correctLong);
+
+  if (isFirstGuess === false) {
+    coordinatesSubheading[0].innerText = distance + "km";
+    isFirstGuess = true;
+    return;
+  }
+
+  if (isSecondGuess === false) {
+    coordinatesSubheading[1].innerText = distance + "km";
+    isSecondGuess = true;
+    return;
+  }
+
+  if (isThirdGuess === false) {
+    coordinatesSubheading[2].innerText = distance + "km";
+    isThirdGuess = true;
+    return;
+  }
+
+  if (isFourthGuess === false) {
+    coordinatesSubheading[3].innerText = distance + "km";
+    isFourthGuess = true;
+    return;
+  }
+
+  if (isFifthGuess === false) {
+    coordinatesSubheading[4].innerText = distance + "km";
+    isFifthGuess = true;
+    return;
+  }
+
+  if (isSixthGuess === false) {
+    coordinatesSubheading[0].innerText = distance + "km";
     isSixthGuess = true;
   }
-}; //----------------------------------------------Is The Continent a Match------------------------------------------------------------------
-
-
-var distanceCalculation = function distanceCalculation(string) {}; //----------------------------------------------Event Listeners------------------------------------------------------------------
+}; //----------------------------------------------Event Listeners------------------------------------------------------------------
 
 
 refreshButton.addEventListener('click', onClickStartNewGame);

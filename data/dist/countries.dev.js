@@ -32,8 +32,8 @@ var countriesArr = [{
   country: "belize",
   flag: "https://upload.wikimedia.org/wikipedia/commons/e/e7/Flag_of_Belize.svg",
   continent: "americas",
-  latutude: -88.4976,
-  longitutue: 17.1899
+  latutude: 17.1899,
+  longitutue: -88.4976
 }, {
   country: "benin",
   flag: "https://upload.wikimedia.org/wikipedia/commons/0/0a/Flag_of_Benin.svg",

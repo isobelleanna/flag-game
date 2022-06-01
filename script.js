@@ -10,6 +10,7 @@ const correctContinentHeading = document.querySelectorAll(".game__main--h4");
 const errorParagraph = document.querySelector(".game__p--error");
 const countryDatalist = document.querySelector(".country-datalist");
 const continueGameButton = document.getElementById("continue-game");
+const coordinatesSubheading = document.querySelectorAll(".game__main--coordinates-subheading");
 let isFirstGuess = false;
 let isSecondGuess = false;
 let isThirdGuess = false;
@@ -18,11 +19,12 @@ let isFifthGuess = false;
 let isSixthGuess = false;
 let correctCountry = "";
 let correctContinent = "";
-let userGuessesArr = [];
 let countryIdPlayed = [];
 let index = 0;
 let score = 0;
 let randomCountryId = 0;
+continueGameButton.disabled = true;
+refreshButton.disabled = true;
 
 //----------------------------------------------Generate an array of numbers------------------------------------------------------------------
 const generateAnArrayOfNumber = () => {
@@ -102,6 +104,9 @@ const onClickRefresh = (event) => {
     countryOptions.forEach(option => {
         option.disabled = false;
     });
+    coordinatesSubheading.forEach(subheading => {
+        subheading.innerText = ""
+    });
 }
 //----------------------------------------------New Game------------------------------------------------------------------
 const onClickStartNewGame = (event) => {
@@ -168,6 +173,8 @@ const isItAMatch = (string) => {
         score += 1
         alert(`Correct! Your current score is ${score}`)
         countryInput.disabled = true
+        continueGameButton.disabled = false;
+        refreshButton.disabled = false;
     }
     if (isFirstGuess === false) {
         string === correctCountry ? correctHeadings[0].innerText = "✅": correctHeadings[0].innerText = "❌";
@@ -193,6 +200,8 @@ const isItAMatch = (string) => {
         string === correctCountry ? correctHeadings[5].innerText = "✅": correctHeadings[5].innerText = "❌";
         itsAContinentMatch(string)
     }
+    continueGameButton.disabled = false;
+    refreshButton.disabled = false;
     countryInput.disabled = true
     alert(`The correct answer is .... ${correctCountry}`)
 
@@ -203,32 +212,72 @@ const itsAContinentMatch = (string) => {
     let userContinent = obj.continent;
     if (isFirstGuess === false) {
         correctContinent === userContinent ? correctContinentHeading[0].innerText = "Continent: ✅": correctContinentHeading[0].innerText = "Continent: ❌";
-        isFirstGuess = true;
+        updateDistanceCalculationHeading(string)
         return;
     }if (isSecondGuess === false) {
         correctContinent === userContinent ? correctContinentHeading[1].innerText = "Continent: ✅": correctContinentHeading[1].innerText = "Continent: ❌";
-        isSecondGuess = true;
+        updateDistanceCalculationHeading(string)
         return
     }if (isThirdGuess === false) {
         correctContinent === userContinent ? correctContinentHeading[2].innerText = "Continent: ✅": correctContinentHeading[2].innerText = "Continent: ❌";
-        isThirdGuess = true;
+        updateDistanceCalculationHeading(string)
         return
     }if (isFourthGuess === false) {
-        correctContinent === userContinent ? correctContinentHeading[3].innerText = "Continent: ✅": correctContinentHeading[3].innerText = "Continent: ❌";
-        isFourthGuess = true;
+        correctContinent === userContinent ? correctContinentHeading[3].innerText = "Continent: ✅": correctContinentHeading[3].innerText = "Continent: ❌"
+        updateDistanceCalculationHeading(string)
         return
     }if (isFifthGuess === false) {
         correctContinent === userContinent ? correctContinentHeading[4].innerText = "Continent: ✅": correctContinentHeading[4].innerText = "Continent: ❌";
-        isFifthGuess = true;
+        updateDistanceCalculationHeading(string)
         return
     }if (isSixthGuess === false) {
         correctContinent === userContinent ? correctContinentHeading[5].innerText = "Continent: ✅": correctContinentHeading[5].innerText = "Continent: ❌";
-        isSixthGuess = true;
+        updateDistanceCalculationHeading(string)
     }
 }
-//----------------------------------------------Is The Continent a Match------------------------------------------------------------------
-const distanceCalculation = (string) => {
-    
+//----------------------------------------------Distance from answers------------------------------------------------------------------
+const distanceCalculation = (userLat, userLong, correctLat, correctLong) => {
+    const degreeToRadians = Math.PI / 180
+    const c = Math.cos;
+    const value = 0.5 - c((correctLat- userLat) * degreeToRadians)/ 2 +
+    c(userLat * degreeToRadians) * c(correctLat * degreeToRadians) *
+    (1-c((correctLong - userLong)* degreeToRadians))/2;
+    return Math.floor(12742 * Math.asin(Math.sqrt(value)));
+}
+
+const updateDistanceCalculationHeading = (string) => {
+    let obj = countriesArr.find(obj => obj.country === string);
+    let correctObj = countriesArr.find(obj => obj.country === correctCountry)
+    let userLat = obj.latutude;
+    let userLong = obj.longitutue;
+    let correctLat = correctObj.latutude;
+    let correctLong = correctObj.longitutue;
+    console.log(distanceCalculation(userLat, userLong, correctLat, correctLong))
+    const distance = distanceCalculation(userLat, userLong, correctLat, correctLong)
+    if (isFirstGuess === false) {
+        coordinatesSubheading[0].innerText = distance + "km"
+        isFirstGuess = true;
+        return;
+    }if (isSecondGuess === false) {
+        coordinatesSubheading[1].innerText = distance + "km"
+        isSecondGuess = true;
+        return
+    }if (isThirdGuess === false) {
+        coordinatesSubheading[2].innerText = distance + "km"
+        isThirdGuess = true;
+        return
+    }if (isFourthGuess === false) {
+        coordinatesSubheading[3].innerText = distance + "km"
+        isFourthGuess = true;
+        return
+    }if (isFifthGuess === false) {
+        coordinatesSubheading[4].innerText = distance + "km"
+        isFifthGuess = true;
+        return
+    }if (isSixthGuess === false) {
+        coordinatesSubheading[0].innerText = distance + "km"
+        isSixthGuess = true;
+    }
 }
 //----------------------------------------------Event Listeners------------------------------------------------------------------
 refreshButton.addEventListener('click', onClickStartNewGame)
