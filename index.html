@@ -8,78 +8,80 @@
     <title>Flagle</title>
   </head>
   <body>
-    <nav class="nav">
-      <h1 class="nav__h1">Guess The Flag</h1>
-      <button class="nav__button" id="refresh">New Game ↩︎</button>
-      <button class="nav__button" id="continue-game">Continue Game</button>
-    </nav>
     <div class="game">
-      <div class="game-card">
-        <div class="game__img-container"></div>
-        <main class="game__main">
-          <p class="game__p--error"></p>
-          <form class="game__main--form" id="country-form">
-            <label for="country-input"></label>
-            <input
-              class="country-form__input"
-              id="country-input"
-              type="search"
-              list="country-form__list"
-              placeholder="Guess the country"
-            />
-            <datalist class="country-datalist" id="country-form__list">
-            </datalist>
-            <input class="country-form__button" type="submit" />
-          </form>
-          <div class="game__main--div">
-            <h2 class="game__main--h2 game__main--h2-1"></h2>
-            <h3 class="game__main--h3 game__main--h3-1"></h3>
-            <h4 class="game__main--h4 game__main--h4-1"></h4>
-            <h5
-              class="game__main--coordinates-subheading game__main--coordinates-subheading-1"
-            ></h5>
-          </div>
-          <div class="game__main--div">
-            <h2 class="game__main--h2 game__main--h2-2"></h2>
-            <h3 class="game__main--h3 game__main--h3-2"></h3>
-            <h4 class="game__main--h4 game__main--h4-2"></h4>
-            <h5
-              class="game__main--coordinates-subheading game__main--coordinates-subheading-2"
-            ></h5>
-          </div>
-          <div class="game__main--div">
-            <h2 class="game__main--h2 game__main--h2-3"></h2>
-            <h3 class="game__main--h3 game__main--h3-3"></h3>
-            <h4 class="game__main--h4 game__main--h4-3"></h4>
-            <h5
-              class="game__main--coordinates-subheading game__main--coordinates-subheading-3"
-            ></h5>
-          </div>
-          <div class="game__main--div">
-            <h2 class="game__main--h2 game__main--h2-4"></h2>
-            <h3 class="game__main--h3 game__main--h3-4"></h3>
-            <h4 class="game__main--h4 game__main--h4-4"></h4>
-            <h5
-              class="game__main--coordinates-subheading game__main--coordinates-subheading-4"
-            ></h5>
-          </div>
-          <div class="game__main--div">
-            <h2 class="game__main--h2 game__main--h2-5"></h2>
-            <h3 class="game__main--h3 game__main--h3-5"></h3>
-            <h4 class="game__main--h4 game__main--h4-5"></h4>
-            <h5
-              class="game__main--coordinates-subheading game__main--coordinates-subheading-5"
-            ></h5>
-          </div>
-          <div class="game__main--div">
-            <h2 class="game__main--h2 game__main--h2-6"></h2>
-            <h3 class="game__main--h3 game__main--h3-6"></h3>
-            <h4 class="game__main--h4 game__main--h4-6"></h4>
-            <h5
-              class="game__main--coordinates-subheading game__main--coordinates-subheading-6"
-            ></h5>
-          </div>
-        </main>
+      <div class="game__container">
+        <nav class="nav">
+          <h1 class="nav__h1">Guess The Flag</h1>
+          <button class="nav__button" id="refresh">New Game ↩︎</button>
+          <button class="nav__button" id="continue-game">Continue Game</button>
+        </nav>
+        <div class="game-card">
+          <div class="game__img-container"></div>
+          <main class="game__main">
+            <p class="game__p--error"></p>
+            <form class="game__main--form" id="country-form">
+              <label for="country-input"></label>
+              <input
+                class="country-form__input"
+                id="country-input"
+                type="search"
+                list="country-form__list"
+                placeholder="Guess the country"
+              />
+              <datalist class="country-datalist" id="country-form__list">
+              </datalist>
+              <input class="country-form__button" type="submit" />
+            </form>
+            <div class="game__main--div">
+              <h2 class="game__main--h2 game__main--h2-1"></h2>
+              <h3 class="game__main--h3 game__main--h3-1"></h3>
+              <h4 class="game__main--h4 game__main--h4-1"></h4>
+              <h5
+                class="game__main--coordinates-subheading game__main--coordinates-subheading-1"
+              ></h5>
+            </div>
+            <div class="game__main--div">
+              <h2 class="game__main--h2 game__main--h2-2"></h2>
+              <h3 class="game__main--h3 game__main--h3-2"></h3>
+              <h4 class="game__main--h4 game__main--h4-2"></h4>
+              <h5
+                class="game__main--coordinates-subheading game__main--coordinates-subheading-2"
+              ></h5>
+            </div>
+            <div class="game__main--div">
+              <h2 class="game__main--h2 game__main--h2-3"></h2>
+              <h3 class="game__main--h3 game__main--h3-3"></h3>
+              <h4 class="game__main--h4 game__main--h4-3"></h4>
+              <h5
+                class="game__main--coordinates-subheading game__main--coordinates-subheading-3"
+              ></h5>
+            </div>
+            <div class="game__main--div">
+              <h2 class="game__main--h2 game__main--h2-4"></h2>
+              <h3 class="game__main--h3 game__main--h3-4"></h3>
+              <h4 class="game__main--h4 game__main--h4-4"></h4>
+              <h5
+                class="game__main--coordinates-subheading game__main--coordinates-subheading-4"
+              ></h5>
+            </div>
+            <div class="game__main--div">
+              <h2 class="game__main--h2 game__main--h2-5"></h2>
+              <h3 class="game__main--h3 game__main--h3-5"></h3>
+              <h4 class="game__main--h4 game__main--h4-5"></h4>
+              <h5
+                class="game__main--coordinates-subheading game__main--coordinates-subheading-5"
+              ></h5>
+            </div>
+            <div class="game__main--div">
+              <h2 class="game__main--h2 game__main--h2-6"></h2>
+              <h3 class="game__main--h3 game__main--h3-6"></h3>
+              <h4 class="game__main--h4 game__main--h4-6"></h4>
+              <h5
+                class="game__main--coordinates-subheading game__main--coordinates-subheading-6"
+              ></h5>
+            </div>
+          </main>
+        </div>
       </div>
     </div>
     <script type="module" src="script.js"></script>

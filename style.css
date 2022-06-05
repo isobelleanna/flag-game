@@ -21,13 +21,6 @@
   padding: 6px;
 }
 
-.body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
 .game {
   font-family: "Yeseva One", cursive;
   color: #5D3A3A;
@@ -35,7 +28,7 @@
   background-color: #B5E0BA;
 }
 .game__card {
-  width: 70%;
+  border: 1px solid #B5E0BA;
 }
 .game__img-container {
   display: flex;
@@ -87,8 +80,8 @@
 
 @media screen and (min-width: 580px) {
   /* ipad and laptop screen */
-  body {
-    max-width: 450px;
+  .game {
+    max-width: 50%;
   }
 }
 .game__main--form {

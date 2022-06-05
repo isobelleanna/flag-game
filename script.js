@@ -23,7 +23,7 @@ let countryIdPlayed = [];
 let index = 0;
 let score = 0;
 let randomCountryId = 0;
-//continueGameButton.disabled = true;
+continueGameButton.disabled = true;
 refreshButton.disabled = true;
 
 //----------------------------------------------Generate an array of numbers------------------------------------------------------------------
@@ -197,13 +197,18 @@ const isItAMatch = (string) => {
         itsAContinentMatch(string)
         return
     }if (isSixthGuess === false) {
-        string === correctCountry ? correctHeadings[5].innerText = "✅": correctHeadings[5].innerText = "❌";
-        itsAContinentMatch(string)
+        if(string === correctCountry) {
+            correctHeadings[5].innerText = "✅"
+            itsAContinentMatch(string)
+        }else{
+            correctHeadings[5].innerText = "❌";
+            alert(`The correct answer is .... ${correctCountry}`)
+            itsAContinentMatch(string)
+        }
     }
     continueGameButton.disabled = false;
     refreshButton.disabled = false;
     countryInput.disabled = true
-    alert(`The correct answer is .... ${correctCountry}`)
 
 }
 //----------------------------------------------Is The Continent a Match------------------------------------------------------------------
@@ -275,7 +280,7 @@ const updateDistanceCalculationHeading = (string) => {
         isFifthGuess = true;
         return
     }if (isSixthGuess === false) {
-        coordinatesSubheading[0].innerText = distance + "km"
+        coordinatesSubheading[5].innerText = distance + "km"
         isSixthGuess = true;
     }
 }

@@ -27,8 +27,8 @@ var correctContinent = "";
 var countryIdPlayed = [];
 var index = 0;
 var score = 0;
-var randomCountryId = 0; //continueGameButton.disabled = true;
-
+var randomCountryId = 0;
+continueGameButton.disabled = true;
 refreshButton.disabled = true; //----------------------------------------------Generate an array of numbers------------------------------------------------------------------
 
 var generateAnArrayOfNumber = function generateAnArrayOfNumber() {
@@ -216,14 +216,19 @@ var isItAMatch = function isItAMatch(string) {
   }
 
   if (isSixthGuess === false) {
-    string === correctCountry ? correctHeadings[5].innerText = "✅" : correctHeadings[5].innerText = "❌";
-    itsAContinentMatch(string);
+    if (string === correctCountry) {
+      correctHeadings[5].innerText = "✅";
+      itsAContinentMatch(string);
+    } else {
+      correctHeadings[5].innerText = "❌";
+      alert("The correct answer is .... ".concat(correctCountry));
+      itsAContinentMatch(string);
+    }
   }
 
   continueGameButton.disabled = false;
   refreshButton.disabled = false;
   countryInput.disabled = true;
-  alert("The correct answer is .... ".concat(correctCountry));
 }; //----------------------------------------------Is The Continent a Match------------------------------------------------------------------
 
 
@@ -325,7 +330,7 @@ var updateDistanceCalculationHeading = function updateDistanceCalculationHeading
   }
 
   if (isSixthGuess === false) {
-    coordinatesSubheading[0].innerText = distance + "km";
+    coordinatesSubheading[5].innerText = distance + "km";
     isSixthGuess = true;
   }
 }; //----------------------------------------------Event Listeners------------------------------------------------------------------
