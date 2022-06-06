@@ -74,6 +74,8 @@ var onClickRefresh = function onClickRefresh(event) {
 
   selectCountryId();
   removedCountryIdPlayed();
+  continueGameButton.disabled = true;
+  refreshButton.disabled = true;
   correctCountry = _countries["default"][randomCountryId].country;
   correctContinent = _countries["default"][randomCountryId].continent;
   allGuessHeadings.forEach(function (guess) {
