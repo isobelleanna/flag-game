@@ -20,7 +20,7 @@ Nology project to create a game of my choice.
 
 --PSEUDOCODE
 
-1. Array of objects with country, flag and continent inside.
+1. Array of objects with country, flag, continent and latitude and longitude inside.
 2. Math.random to render a random flag.
 3. Input box which autofills countries.
 4. Begin with correct/incorrect, then correct/incorrect continent, then distance from correct answer, then arrow to show direction from the correct answer and percentage.
