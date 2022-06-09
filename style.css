@@ -21,6 +21,13 @@
   padding: 6px;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .game {
   font-family: "Yeseva One", cursive;
   color: #5D3A3A;
