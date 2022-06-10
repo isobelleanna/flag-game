@@ -7,11 +7,17 @@
     align-items: center;
     justify-content: space-around;
     font-family: $primary-font;
-    background-color: $colour-background-secondary;
+    background-color: $colour-background-primary;
     color: $colour-font-primary;
+    &__heading {
+        font-family: $heading-font;
+        color: $colour-font-secondary;
+        font-size: 2em;
+    }
     &__button {
-        background-color: $colour-background-primary;
+        background-color: $colour-button;
         color: $colour-font-secondary;
         padding: 6px;
+        font-family: $secondary-font;
     }
 }

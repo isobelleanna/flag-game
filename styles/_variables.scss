@@ -1,10 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&family=JetBrains+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+//--FONT
+$primary-font: 'IBM Plex Sans', sans-serif;
+$secondary-font: 'JetBrains Mono', monospace;
+$heading-font: 'Bebas Neue', cursive;
 
-$primary-font:'Yeseva One', cursive;
+$colour-background-primary:  #b8c1ec ;
+$colour-background-secondary: #fffffe;
 
-$colour-background-primary: #B5E0BA;
-$colour-background-secondary: #F7FFBD;
+$colour-font-primary: #121629;
+$colour-font-secondary: #232946;
 
-$colour-font-primary: #5D3A3A;
-$colour-font-secondary: #905858;
-
+$colour-body: #232946;
+$colour-button: #eebbc3;

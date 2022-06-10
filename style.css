@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&family=JetBrains+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 * {
   padding: 0;
   margin: 0;
@@ -11,14 +12,20 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  font-family: "Yeseva One", cursive;
-  background-color: #F7FFBD;
-  color: #5D3A3A;
+  font-family: "IBM Plex Sans", sans-serif;
+  background-color: #b8c1ec;
+  color: #121629;
+}
+.nav__heading {
+  font-family: "Bebas Neue", cursive;
+  color: #232946;
+  font-size: 2em;
 }
 .nav__button {
-  background-color: #B5E0BA;
-  color: #905858;
+  background-color: #eebbc3;
+  color: #232946;
   padding: 6px;
+  font-family: "JetBrains Mono", monospace;
 }
 
 body {
@@ -26,16 +33,18 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: #232946;
 }
 
 .game {
-  font-family: "Yeseva One", cursive;
-  color: #5D3A3A;
-  border: 1px solid #5D3A3A;
-  background-color: #B5E0BA;
+  margin: 1em;
+  padding: 1em;
+  color: #121629;
+  border-radius: 10px;
+  background-color: #b8c1ec;
 }
 .game__card {
-  border: 1px solid #B5E0BA;
+  border: 1px solid #b8c1ec;
 }
 .game__img-container {
   display: flex;
@@ -61,7 +70,7 @@ body {
   height: 12px;
   width: 70%;
   margin: 1vh;
-  background-color: #F7FFBD;
+  background-color: #fffffe;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -72,14 +81,23 @@ body {
   padding-top: 2vh;
   padding-bottom: 2vh;
 }
-.game__main--h2 {
+.game__main--guess-heading {
+  font-family: "JetBrains Mono", monospace;
   font-size: 12px;
   padding-right: 2px;
 }
-.game__main--h3 {
+.game__main--correct-heading {
+  font-family: "JetBrains Mono", monospace;
   font-size: 12px;
 }
-.game__main--h4 {
+.game__main--continent-heading {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  padding-left: 2vh;
+  padding-right: 2vh;
+}
+.game__main--coordinates-subheading {
+  font-family: "JetBrains Mono", monospace;
   font-size: 12px;
   padding-left: 2vh;
   padding-right: 2vh;
@@ -88,7 +106,13 @@ body {
 @media screen and (min-width: 580px) {
   /* ipad and laptop screen */
   .game {
-    max-width: 50%;
+    max-width: 60%;
+  }
+}
+@media screen and (min-width: 880px) {
+  /* ipad and laptop screen */
+  .game {
+    max-width: 40%;
   }
 }
 .game__main--form {
@@ -96,15 +120,20 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 .country-form__input {
-  width: 60%;
+  width: 70%;
   padding: 8px;
+  font-family: "JetBrains Mono", monospace;
 }
 .country-form__button {
-  background-color: #F7FFBD;
-  color: #5D3A3A;
+  margin-top: 1vh;
+  width: 70%;
+  background-color: #eebbc3;
+  color: #232946;
   padding: 8px;
-  border: 1px solid #5D3A3A;
+  border: 1px solid #121629;
+  font-family: "JetBrains Mono", monospace;
 }/*# sourceMappingURL=style.css.map */
